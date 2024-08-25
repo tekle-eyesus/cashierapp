@@ -13,8 +13,17 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  bool isCashPressed = false;
+  bool isCashPressed = true;
   bool isQrPressed = false;
+  int totalPrice = 0;
+  int getPrice() {
+    setState(() {
+      totalPrice =
+          Provider.of<ProductStore>(context, listen: false).getTotalPrice();
+    });
+
+    return totalPrice;
+  }
 
   void handleCash() {
     setState(() {
@@ -136,7 +145,7 @@ class _CartScreenState extends State<CartScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "ET5000",
+                        "\$" + getPrice().toString(),
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,

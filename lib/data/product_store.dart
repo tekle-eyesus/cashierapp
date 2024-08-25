@@ -29,6 +29,7 @@ class ProductStore extends ChangeNotifier {
     bool added = false;
     for (var element in _cartList) {
       if (element.productName == itemObject.productName) {
+        element.proAmount = element.proAmount + 1;
         added = true;
       }
     }
@@ -41,9 +42,27 @@ class ProductStore extends ChangeNotifier {
     }
   }
 
+  int getAmount(int index) {
+    int pamount = 1;
+    for (var i = 0; i < _cartList.length; i++) {
+      pamount = _cartList[index].proAmount;
+    }
+
+    return pamount;
+  }
+
   void deleteFromCart(ProductItem product) {
     _cartList.remove(product);
     notifyListeners();
+  }
+
+  int getTotalPrice() {
+    int total = 0;
+    for (var element in _cartList) {
+      total = (element.price * element.proAmount) + total;
+    }
+
+    return total;
   }
 
   bool called = false;

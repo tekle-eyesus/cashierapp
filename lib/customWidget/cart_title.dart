@@ -25,7 +25,6 @@ class CartTitle extends StatefulWidget {
 }
 
 class _CartTitleState extends State<CartTitle> {
-  int amount = 1;
   String? productName;
   String? productCategory;
   int? productPrice;
@@ -38,6 +37,7 @@ class _CartTitleState extends State<CartTitle> {
     productKey = key;
     // onClick = onClick;
   }
+  int amount = 1;
 
   void handleIncrement() {
     setState(() {

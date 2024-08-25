@@ -18,8 +18,12 @@ class ProductTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     void newObject() {
+      int count = 1;
       ProductItem pItem = ProductItem(
-          productName: productName, category: category, price: price);
+          productName: productName,
+          category: category,
+          price: price,
+          proAmount: count);
 
       Provider.of<ProductStore>(context, listen: false).addProductToCart(pItem);
     }

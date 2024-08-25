@@ -14,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
-
+  bool darkMode = false;
   void handleScreenOption(int index) {
     setState(() {
       selectedIndex = index;
