@@ -1,6 +1,7 @@
 import 'package:cashier_app/screens/addProduct_screen.dart';
 import 'package:cashier_app/screens/cart_screen.dart';
 import 'package:cashier_app/screens/menu_screen.dart';
+import 'package:cashier_app/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     MenuScreen(),
     CartScreen(),
     AddScreen(),
-    Text("profile"),
+    ProfileScreen(),
   ];
   @override
   Widget build(BuildContext context) {

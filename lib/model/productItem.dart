@@ -1,6 +1,6 @@
 class ProductItem {
   final String productName;
-  final double price;
+  final int price;
   final String category;
 
   ProductItem(

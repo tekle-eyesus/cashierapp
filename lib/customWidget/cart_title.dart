@@ -1,22 +1,43 @@
 import 'package:cashier_app/data/product_store.dart';
+import 'package:cashier_app/model/productItem.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartTitle extends StatefulWidget {
-  final String name;
+  final String proName;
   final int price;
-  const CartTitle({super.key, required this.name, required this.price});
+  final String category;
+  final int index;
+
+// why the values are not defined in the class that extends the state
+  const CartTitle({
+    super.key,
+    required this.proName,
+    required this.price,
+    required this.category,
+    required this.index,
+  });
 
   @override
-  State<CartTitle> createState() => _CartTitleState();
+  // ignore: no_logic_in_create_state
+  State<CartTitle> createState() => _CartTitleState(
+      proName, price, category, index); //i think there is the problem hereeee
 }
 
 class _CartTitleState extends State<CartTitle> {
-  String? namep;
-  get name => String;
-  get price => int;
-
   int amount = 1;
+  String? productName;
+  String? productCategory;
+  int? productPrice;
+  int? productKey;
+
+  _CartTitleState(String proName, int price, String category, int key) {
+    productCategory = category;
+    productPrice = price;
+    productName = proName;
+    productKey = key;
+    // onClick = onClick;
+  }
 
   void handleIncrement() {
     setState(() {
@@ -32,6 +53,15 @@ class _CartTitleState extends State<CartTitle> {
     }
   }
 
+  void deleteProduct() {
+    print(productKey);
+    ProductItem itemToDelete = Provider.of<ProductStore>(context, listen: false)
+        .getObject(productKey!);
+    Provider.of<ProductStore>(context, listen: false)
+        .deleteFromCart(itemToDelete);
+    print(itemToDelete.productName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProductStore>(builder: (context, value, child) {
@@ -43,7 +73,7 @@ class _CartTitleState extends State<CartTitle> {
         child: ListTile(
           isThreeLine: true,
           title: Text(
-            "$name",
+            "${productName}",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22),
           ),
@@ -103,14 +133,14 @@ class _CartTitleState extends State<CartTitle> {
                         iconColor: MaterialStateProperty.all(Colors.white),
                         backgroundColor: MaterialStateProperty.all(Colors.red),
                       ),
-                      onPressed: () {},
+                      onPressed: deleteProduct,
                       child: Icon(Icons.delete_forever_outlined)),
                 ),
               ],
             ),
           ),
           trailing: Text(
-            price.toString(),
+            "${(productPrice! * amount)}",
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,

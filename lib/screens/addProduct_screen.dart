@@ -61,7 +61,7 @@ class AddScreen extends StatelessWidget {
       home: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 80, 46, 201),
+            Color.fromARGB(255, 224, 222, 230),
             Color.fromARGB(255, 198, 182, 182)
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),

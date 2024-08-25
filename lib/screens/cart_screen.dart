@@ -2,6 +2,7 @@ import 'package:cashier_app/customWidget/cart_title.dart';
 import 'package:cashier_app/data/product_store.dart';
 import 'package:cashier_app/data/products_data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatefulWidget {
@@ -12,10 +13,160 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  bool isCashPressed = false;
+  bool isQrPressed = false;
+
+  void handleCash() {
+    setState(() {
+      isCashPressed = !isCashPressed;
+      if (isQrPressed) {
+        isQrPressed = !isQrPressed;
+      }
+    });
+  }
+
+  void handleQRcode() {
+    setState(() {
+      isQrPressed = !isQrPressed;
+      if (isCashPressed) {
+        isCashPressed = !isCashPressed;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+      persistentFooterButtons: [
+        Container(
+          margin: EdgeInsets.all(10),
+          width: 500,
+          height: 160,
+          // color: Colors.red,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                    onTap: handleCash,
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      width: 160,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Color.fromARGB(255, 11, 0, 218)),
+                        color: isCashPressed
+                            ? Color.fromARGB(255, 11, 0, 218)
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.money,
+                            size: 35,
+                            color: isCashPressed
+                                ? Colors.white
+                                : Color.fromARGB(255, 11, 0, 218),
+                          ),
+                          Text(
+                            "Cash",
+                            style: TextStyle(
+                              color: isCashPressed
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 11, 0, 218),
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: handleQRcode,
+                    child: Container(
+                      margin: EdgeInsets.all(10),
+                      width: 160,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Color.fromARGB(255, 11, 0, 218)),
+                        color: isQrPressed
+                            ? Color.fromARGB(255, 11, 0, 218)
+                            : Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.qr_code,
+                            size: 35,
+                            color: isQrPressed
+                                ? Colors.white
+                                : Color.fromARGB(255, 11, 0, 218),
+                          ),
+                          Text(
+                            "QR",
+                            style: TextStyle(
+                              color: isQrPressed
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 11, 0, 218),
+                              fontSize: 20,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              Container(
+                width: 500,
+                height: 60,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 4, 23, 239),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "ET5000",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                    TextButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            Text(
+                              "Process",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios_rounded,
+                              color: Colors.white,
+                            )
+                          ],
+                        ))
+                  ],
+                ),
+              )
+            ],
+          ),
+        )
+      ],
       appBar: AppBar(
         centerTitle: true,
         leading: Icon(Icons.arrow_back),
@@ -38,8 +189,10 @@ class _CartScreenState extends State<CartScreen> {
         return ListView.builder(
             itemCount: value.cartList.length,
             itemBuilder: ((context, index) => CartTitle(
-                  name: value.cartList[index][0],
-                  price: value.cartList[index][1],
+                  proName: value.cartList[index].productName,
+                  price: value.cartList[index].price,
+                  category: value.cartList[index].category,
+                  index: index,
                 )));
       }),
     ));

@@ -16,6 +16,8 @@ class _MenuScreenState extends State<MenuScreen> {
   bool isFoodPressed = false;
   bool isSnackPressed = false;
 
+  bool isDark = false;
+
   void handleContainerColor() {
     setState(() {
       isAllPressed = !isAllPressed;
@@ -74,27 +76,41 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: MaterialApp(
-        home: Column(
-          children: [
-            SizedBox(
-              height: 35,
+        child: MaterialApp(
+      color: Colors.amber,
+      home: Scaffold(
+        backgroundColor: isDark ? Colors.black : Colors.white,
+        appBar: AppBar(
+          title: DefaultTextStyle(
+            style: TextStyle(
+              color: Color.fromARGB(255, 5, 5, 174),
+              fontSize: 25,
+              fontWeight: FontWeight.w600,
             ),
-            Text(
+            child: Text(
               "Menu",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color.fromARGB(255, 5, 5, 174),
-                  fontSize: 17,
-                  fontWeight: FontWeight.w600),
             ),
-            SizedBox(
-              height: 35,
-            ),
+          ),
+          actions: [
+            PopupMenuButton(
+                itemBuilder: (context) => [
+                      PopupMenuItem(child: Text("about")),
+                      PopupMenuItem(
+                          onTap: () => setState(() {
+                                isDark = !isDark;
+                              }),
+                          child: Text(isDark ? "Light Mode" : "Dark"))
+                    ])
+          ],
+        ),
+        body: Column(
+          children: [
             Container(
               margin: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                border: Border.all(),
+                border: Border.all(
+                    color: !isDark ? Colors.blueAccent : Colors.white),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
@@ -109,6 +125,9 @@ class _MenuScreenState extends State<MenuScreen> {
                     child: Icon(Icons.search),
                   ),
                   hintText: "Search product...",
+                  hintStyle: TextStyle(
+                    color: isDark ? Colors.white : Colors.grey,
+                  ),
                   border: InputBorder.none,
                   contentPadding: EdgeInsets.only(bottom: 5, left: 0),
                 ),
@@ -274,14 +293,10 @@ class _MenuScreenState extends State<MenuScreen> {
                           scrollDirection: Axis.vertical,
                           itemBuilder: (context, index) {
                             return ProductTitle(
-                                productName: value.storeList[index][0],
-                                price: value.storeList[index][1],
-                                category: value.storeList[index][2],
-                                onPressed: () {
-                                  Provider.of<ProductStore>(context,
-                                          listen: false)
-                                      .addProductToCart(index);
-                                });
+                              productName: value.storeList[index][0],
+                              price: value.storeList[index][1],
+                              category: value.storeList[index][2],
+                            );
                           },
                         )
                       : isDrinkPressed
@@ -293,14 +308,10 @@ class _MenuScreenState extends State<MenuScreen> {
                               scrollDirection: Axis.vertical,
                               itemBuilder: (context, index) {
                                 return ProductTitle(
-                                    productName: value.storeDrikList[index][0],
-                                    price: value.storeDrikList[index][1],
-                                    category: value.storeDrikList[index][2],
-                                    onPressed: () {
-                                      Provider.of<ProductStore>(context,
-                                              listen: false)
-                                          .addProductToCart(index);
-                                    });
+                                  productName: value.storeDrikList[index][0],
+                                  price: value.storeDrikList[index][1],
+                                  category: value.storeDrikList[index][2],
+                                );
                               },
                             )
                           : isSnackPressed
@@ -312,16 +323,11 @@ class _MenuScreenState extends State<MenuScreen> {
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
                                     return ProductTitle(
-                                        productName: value.storeSnackList[index]
-                                            [0],
-                                        price: value.storeSnackList[index][1],
-                                        category: value.storeSnackList[index]
-                                            [2],
-                                        onPressed: () {
-                                          Provider.of<ProductStore>(context,
-                                                  listen: false)
-                                              .addProductToCart(index);
-                                        });
+                                      productName: value.storeSnackList[index]
+                                          [0],
+                                      price: value.storeSnackList[index][1],
+                                      category: value.storeSnackList[index][2],
+                                    );
                                   },
                                 )
                               : GridView.builder(
@@ -332,15 +338,11 @@ class _MenuScreenState extends State<MenuScreen> {
                                   scrollDirection: Axis.vertical,
                                   itemBuilder: (context, index) {
                                     return ProductTitle(
-                                        productName: value.storeFoodList[index]
-                                            [0],
-                                        price: value.storeFoodList[index][1],
-                                        category: value.storeFoodList[index][2],
-                                        onPressed: () {
-                                          Provider.of<ProductStore>(context,
-                                                  listen: false)
-                                              .addProductToCart(index);
-                                        });
+                                      productName: value.storeFoodList[index]
+                                          [0],
+                                      price: value.storeFoodList[index][1],
+                                      category: value.storeFoodList[index][2],
+                                    );
                                   },
                                 );
                 },
@@ -349,6 +351,6 @@ class _MenuScreenState extends State<MenuScreen> {
           ],
         ),
       ),
-    );
+    ));
   }
 }

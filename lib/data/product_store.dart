@@ -1,3 +1,4 @@
+import 'package:cashier_app/model/productItem.dart';
 import 'package:flutter/material.dart';
 
 class ProductStore extends ChangeNotifier {
@@ -18,17 +19,31 @@ class ProductStore extends ChangeNotifier {
   final List _storeFoodList = [];
   final List _storeSnackList = [];
 
-  final List _cartList = [];
+  final List<ProductItem> _cartList = [];
 
-  void addProductToCart(int index) {
-    if (!_cartList.contains(_storeList[index])) {
-      _cartList.add(_storeList[index]);
+  ProductItem getObject(int index) {
+    return _cartList.elementAt(index);
+  }
+
+  void addProductToCart(ProductItem itemObject) {
+    bool added = false;
+    for (var element in _cartList) {
+      if (element.productName == itemObject.productName) {
+        added = true;
+      }
+    }
+
+    if (!added) {
+      _cartList.add(itemObject);
       notifyListeners();
+    } else {
+      print("repeted...");
     }
   }
 
-  void deleteFromCart(index) {
-    _cartList.remove(index);
+  void deleteFromCart(ProductItem product) {
+    _cartList.remove(product);
+    notifyListeners();
   }
 
   bool called = false;

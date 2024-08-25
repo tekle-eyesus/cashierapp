@@ -1,20 +1,29 @@
+import 'package:cashier_app/data/product_store.dart';
+import 'package:cashier_app/model/productItem.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductTitle extends StatelessWidget {
   final String productName;
   final int price;
   final String category;
-  final void Function()? onPressed;
 
-  const ProductTitle(
-      {super.key,
-      required this.category,
-      required this.price,
-      required this.productName,
-      required this.onPressed});
+  const ProductTitle({
+    super.key,
+    required this.category,
+    required this.price,
+    required this.productName,
+  });
 
   @override
   Widget build(BuildContext context) {
+    void newObject() {
+      ProductItem pItem = ProductItem(
+          productName: productName, category: category, price: price);
+
+      Provider.of<ProductStore>(context, listen: false).addProductToCart(pItem);
+    }
+
     return Container(
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
@@ -54,7 +63,7 @@ class ProductTitle extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: IconButton(
-                    onPressed: onPressed,
+                    onPressed: newObject,
                     icon: Icon(
                       size: 20,
                       Icons.add,
