@@ -16,6 +16,7 @@ class _CartScreenState extends State<CartScreen> {
   bool isCashPressed = true;
   bool isQrPressed = false;
   int totalPrice = 0;
+
   int getPrice() {
     setState(() {
       totalPrice =
@@ -27,20 +28,86 @@ class _CartScreenState extends State<CartScreen> {
 
   void handleCash() {
     setState(() {
-      isCashPressed = !isCashPressed;
+      if (!isCashPressed) {
+        isCashPressed = !isCashPressed;
+      }
       if (isQrPressed) {
         isQrPressed = !isQrPressed;
       }
+    });
+    setState(() {
+      totalPrice =
+          Provider.of<ProductStore>(context, listen: false).getTotalPrice();
     });
   }
 
   void handleQRcode() {
     setState(() {
-      isQrPressed = !isQrPressed;
+      if (!isQrPressed) {
+        isQrPressed = !isQrPressed;
+      }
+
       if (isCashPressed) {
         isCashPressed = !isCashPressed;
       }
     });
+
+    setState(() {
+      totalPrice =
+          Provider.of<ProductStore>(context, listen: false).getTotalPrice();
+    });
+
+    showDialog(
+        context: context,
+        builder: ((context) => AlertDialog(
+              title: Text(
+                "Scan QR code",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 7, 13, 204),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              content: FutureBuilder(
+                future: getData(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator(
+                      color: Color.fromARGB(255, 7, 7, 255),
+                      strokeWidth: 2,
+                    );
+                  }
+                  if (snapshot.hasError) {
+                    return Text(snapshot.error.toString());
+                  } else {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.qr_code_2_outlined,
+                          size: 200,
+                        )
+                      ],
+                    );
+                  }
+                },
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Cancel"),
+                ),
+              ],
+            )));
+  }
+
+  Future<Widget> getData() async {
+    await Future.delayed(const Duration(seconds: 2));
+    return Icon(
+      Icons.qr_code_2_rounded,
+      size: 200,
+    );
   }
 
   @override
@@ -145,7 +212,7 @@ class _CartScreenState extends State<CartScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        "\$" + getPrice().toString(),
+                        "\$" + "$totalPrice",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -177,15 +244,17 @@ class _CartScreenState extends State<CartScreen> {
         )
       ],
       appBar: AppBar(
-        centerTitle: true,
-        leading: Icon(Icons.arrow_back),
         title: DefaultTextStyle(
           style: TextStyle(
             color: Colors.black,
             fontSize: 20,
             fontWeight: FontWeight.w500,
           ),
-          child: Text("Order Detail"),
+          child: Text(
+            "Order Detail",
+            style: TextStyle(
+                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w600),
+          ),
         ),
         actions: [
           Icon(
@@ -201,6 +270,7 @@ class _CartScreenState extends State<CartScreen> {
                   proName: value.cartList[index].productName,
                   price: value.cartList[index].price,
                   category: value.cartList[index].category,
+                  pAmount: value.cartList[index].proAmount,
                   index: index,
                 )));
       }),

@@ -19,7 +19,7 @@ class ProductStore extends ChangeNotifier {
   final List _storeFoodList = [];
   final List _storeSnackList = [];
 
-  final List<ProductItem> _cartList = [];
+  List<ProductItem> _cartList = [];
 
   ProductItem getObject(int index) {
     return _cartList.elementAt(index);
@@ -31,6 +31,7 @@ class ProductStore extends ChangeNotifier {
       if (element.productName == itemObject.productName) {
         element.proAmount = element.proAmount + 1;
         added = true;
+        print(element.proAmount);
       }
     }
 

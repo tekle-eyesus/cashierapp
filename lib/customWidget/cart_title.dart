@@ -1,5 +1,6 @@
 import 'package:cashier_app/data/product_store.dart';
 import 'package:cashier_app/model/productItem.dart';
+import 'package:cashier_app/screens/cart_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -8,6 +9,7 @@ class CartTitle extends StatefulWidget {
   final int price;
   final String category;
   final int index;
+  final int pAmount;
 
 // why the values are not defined in the class that extends the state
   const CartTitle({
@@ -16,12 +18,13 @@ class CartTitle extends StatefulWidget {
     required this.price,
     required this.category,
     required this.index,
+    required this.pAmount,
   });
 
   @override
   // ignore: no_logic_in_create_state
-  State<CartTitle> createState() => _CartTitleState(
-      proName, price, category, index); //i think there is the problem hereeee
+  State<CartTitle> createState() => _CartTitleState(proName, price, category,
+      index, pAmount); //i think there is the problem hereeee
 }
 
 class _CartTitleState extends State<CartTitle> {
@@ -29,26 +32,49 @@ class _CartTitleState extends State<CartTitle> {
   String? productCategory;
   int? productPrice;
   int? productKey;
+  int? amount;
 
-  _CartTitleState(String proName, int price, String category, int key) {
+  _CartTitleState(
+      String proName, int price, String category, int key, int proAmount) {
     productCategory = category;
     productPrice = price;
     productName = proName;
     productKey = key;
+    amount = proAmount;
     // onClick = onClick;
   }
-  int amount = 1;
+  int _getAmount() {
+    return Provider.of<ProductStore>(context, listen: false)
+        .getAmount(productKey!);
+  }
 
   void handleIncrement() {
     setState(() {
-      amount++;
+      amount = amount! + 1;
+
+      ProductItem pItem = ProductItem(
+          productName: productName!,
+          category: productCategory!,
+          price: productPrice!,
+          proAmount: amount!);
+
+      Provider.of<ProductStore>(context, listen: false).addProductToCart(pItem);
     });
   }
 
   void handleDecrement() {
     if (amount != 1) {
       setState(() {
-        amount--;
+        amount = amount! - 1;
+
+        ProductItem pItem = ProductItem(
+            productName: productName!,
+            category: productCategory!,
+            price: productPrice!,
+            proAmount: amount!);
+
+        Provider.of<ProductStore>(context, listen: false)
+            .addProductToCart(pItem);
       });
     }
   }
@@ -140,7 +166,7 @@ class _CartTitleState extends State<CartTitle> {
             ),
           ),
           trailing: Text(
-            "${(productPrice! * amount)}",
+            "${(productPrice! * amount!)}",
             style: TextStyle(
               color: Colors.black,
               fontSize: 20,

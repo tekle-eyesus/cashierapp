@@ -20,7 +20,10 @@ class _MenuScreenState extends State<MenuScreen> {
 
   void handleContainerColor() {
     setState(() {
-      isAllPressed = !isAllPressed;
+      if (!isAllPressed) {
+        isAllPressed = !isAllPressed;
+      }
+
       if (isDrinkPressed) {
         isDrinkPressed = !isDrinkPressed;
       } else if (isFoodPressed) {
@@ -33,7 +36,10 @@ class _MenuScreenState extends State<MenuScreen> {
 
   void handleDrinkColor() {
     setState(() {
-      isDrinkPressed = !isDrinkPressed;
+      if (!isDrinkPressed) {
+        isDrinkPressed = !isDrinkPressed;
+      }
+
       if (isAllPressed) {
         isAllPressed = !isAllPressed;
       } else if (isFoodPressed) {
@@ -48,7 +54,10 @@ class _MenuScreenState extends State<MenuScreen> {
   void handleFoodColor() {
     Provider.of<ProductStore>(context, listen: false).devider();
     setState(() {
-      isFoodPressed = !isFoodPressed;
+      if (!isFoodPressed) {
+        isFoodPressed = !isFoodPressed;
+      }
+
       if (isDrinkPressed) {
         isDrinkPressed = !isDrinkPressed;
       } else if (isAllPressed) {
@@ -62,7 +71,10 @@ class _MenuScreenState extends State<MenuScreen> {
   void handleSnackColor() {
     Provider.of<ProductStore>(context, listen: false).devider();
     setState(() {
-      isSnackPressed = !isSnackPressed;
+      if (!isSnackPressed) {
+        isSnackPressed = !isSnackPressed;
+      }
+
       if (isDrinkPressed) {
         isDrinkPressed = !isDrinkPressed;
       } else if (isFoodPressed) {
