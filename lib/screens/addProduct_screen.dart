@@ -2,20 +2,29 @@ import 'package:cashier_app/data/product_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class AddScreen extends StatelessWidget {
+class AddScreen extends StatefulWidget {
   AddScreen({
     super.key,
   });
 
   @override
+  State<AddScreen> createState() => _AddScreenState();
+}
+
+class _AddScreenState extends State<AddScreen> {
+  String hintText = "Select Category";
+  String? categoryValue;
+  @override
   Widget build(BuildContext context) {
-    String? categoryValue;
     final newProductNameController = TextEditingController();
     final newProductPriceController = TextEditingController();
 
     void clearController() {
       newProductPriceController.clear();
       newProductNameController.clear();
+      setState(() {
+        hintText = "Select Category";
+      });
     }
 
     void addProduct() {
@@ -84,6 +93,52 @@ class AddScreen extends StatelessWidget {
               height: 65,
             ),
             Container(
+              width: 200,
+              padding: EdgeInsets.only(left: 20),
+              margin: EdgeInsets.only(right: 150),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 19, 32, 216),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: DropdownButton(
+                iconSize: 35,
+                icon: hintText != "Select Category"
+                    ? Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(
+                          Icons.check_circle,
+                          size: 20,
+                          color: Colors.green,
+                        ),
+                      )
+                    : Icon(Icons.arrow_drop_down_outlined),
+                underline: Text(""),
+                hint: Text(
+                  hintText,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                ),
+                dropdownColor: Color.fromARGB(255, 221, 217, 206),
+                items: [
+                  DropdownMenuItem(value: "drink", child: Text("drink")),
+                  DropdownMenuItem(value: "food", child: Text("food")),
+                  DropdownMenuItem(value: "snack", child: Text("snack")),
+                ],
+                onChanged: (value) {
+                  setState(() {
+                    hintText = value!;
+                    categoryValue = value;
+                  });
+                },
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
                 margin: EdgeInsets.only(left: 15, right: 15, bottom: 10),
                 width: 350,
                 decoration: BoxDecoration(
@@ -129,32 +184,7 @@ class AddScreen extends StatelessWidget {
                       hintStyle: TextStyle(fontSize: 20)),
                 )),
             SizedBox(
-              height: 10,
-            ),
-            Container(
-              margin: EdgeInsets.only(right: 208),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 19, 32, 216),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: DropdownButton(
-                hint: Text(
-                  "  Select Category",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 15,
-                  ),
-                ),
-                dropdownColor: Color.fromARGB(255, 221, 217, 206),
-                items: [
-                  DropdownMenuItem(value: "drink", child: Text("drink")),
-                  DropdownMenuItem(value: "food", child: Text("food")),
-                  DropdownMenuItem(value: "snack", child: Text("snack")),
-                ],
-                onChanged: (value) {
-                  categoryValue = value;
-                },
-              ),
+              height: 5,
             ),
             InkWell(
               onTap: addProduct,
