@@ -46,8 +46,9 @@ class _AddScreenState extends State<AddScreen> {
         String pname = newProductNameController.text;
         int pprice = int.parse(newProductPriceController.text);
         String? pcategory = categoryValue;
+        String imageUrl = "";
 
-        List produt = [pname, pprice, pcategory];
+        List produt = [pname, pprice, pcategory, imageUrl];
         print(produt);
 
         Provider.of<ProductStore>(context, listen: false).addNewProduct(produt);

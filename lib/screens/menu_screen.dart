@@ -308,6 +308,7 @@ class _MenuScreenState extends State<MenuScreen> {
                               productName: value.storeList[index][0],
                               price: value.storeList[index][1],
                               category: value.storeList[index][2],
+                              image: value.storeList[index][3],
                             );
                           },
                         )
@@ -323,6 +324,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                   productName: value.storeDrikList[index][0],
                                   price: value.storeDrikList[index][1],
                                   category: value.storeDrikList[index][2],
+                                  image: value.storeList[index][3],
                                 );
                               },
                             )
@@ -339,6 +341,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                           [0],
                                       price: value.storeSnackList[index][1],
                                       category: value.storeSnackList[index][2],
+                                      image: value.storeList[index][3],
                                     );
                                   },
                                 )
@@ -354,6 +357,7 @@ class _MenuScreenState extends State<MenuScreen> {
                                           [0],
                                       price: value.storeFoodList[index][1],
                                       category: value.storeFoodList[index][2],
+                                      image: value.storeList[index][3],
                                     );
                                   },
                                 );

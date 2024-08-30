@@ -110,8 +110,11 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
+  void deleteCart() {}
+
   @override
   Widget build(BuildContext context) {
+    print("the build from the cartscreen!!");
     return MaterialApp(
         home: Scaffold(
       persistentFooterButtons: [
@@ -271,6 +274,10 @@ class _CartScreenState extends State<CartScreen> {
                   price: value.cartList[index].price,
                   category: value.cartList[index].category,
                   pAmount: value.cartList[index].proAmount,
+                  onPressed: () => setState(() {
+                    print("here Executed");
+                  }),
+                  image: value.cartList[index].imageURL,
                   index: index,
                 )));
       }),

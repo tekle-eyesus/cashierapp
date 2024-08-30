@@ -10,21 +10,24 @@ class CartTitle extends StatefulWidget {
   final String category;
   final int index;
   final int pAmount;
+  final void Function()? onPressed;
+  final String image;
 
 // why the values are not defined in the class that extends the state
-  const CartTitle({
-    super.key,
-    required this.proName,
-    required this.price,
-    required this.category,
-    required this.index,
-    required this.pAmount,
-  });
+  const CartTitle(
+      {super.key,
+      required this.proName,
+      required this.price,
+      required this.category,
+      required this.index,
+      required this.pAmount,
+      required this.onPressed,
+      required this.image});
 
   @override
   // ignore: no_logic_in_create_state
   State<CartTitle> createState() => _CartTitleState(proName, price, category,
-      index, pAmount); //i think there is the problem hereeee
+      index, pAmount, onPressed!, image); //i think there is the problem hereeee
 }
 
 class _CartTitleState extends State<CartTitle> {
@@ -33,14 +36,18 @@ class _CartTitleState extends State<CartTitle> {
   int? productPrice;
   int? productKey;
   int? amount;
+  final void Function() onPressed;
+  String? imageURL;
 
-  _CartTitleState(
-      String proName, int price, String category, int key, int proAmount) {
+  _CartTitleState(String proName, int price, String category, int key,
+      int proAmount, this.onPressed, image) {
     productCategory = category;
     productPrice = price;
     productName = proName;
     productKey = key;
     amount = proAmount;
+    imageURL = image;
+
     // onClick = onClick;
   }
   int _getAmount() {
@@ -53,6 +60,7 @@ class _CartTitleState extends State<CartTitle> {
       amount = amount! + 1;
 
       ProductItem pItem = ProductItem(
+          imageURL: imageURL!,
           productName: productName!,
           category: productCategory!,
           price: productPrice!,
@@ -68,6 +76,7 @@ class _CartTitleState extends State<CartTitle> {
         amount = amount! - 1;
 
         ProductItem pItem = ProductItem(
+            imageURL: imageURL!,
             productName: productName!,
             category: productCategory!,
             price: productPrice!,
@@ -85,6 +94,9 @@ class _CartTitleState extends State<CartTitle> {
         .getObject(productKey!);
     Provider.of<ProductStore>(context, listen: false)
         .deleteFromCart(itemToDelete);
+    setState(() {
+      print("object");
+    });
     print(itemToDelete.productName);
   }
 
@@ -97,15 +109,21 @@ class _CartTitleState extends State<CartTitle> {
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Color.fromARGB(255, 14, 0, 206))),
         child: ListTile(
-          isThreeLine: true,
           title: Text(
             "${productName}",
             style: TextStyle(
                 color: Colors.black, fontWeight: FontWeight.bold, fontSize: 22),
           ),
-          leading: Icon(
-            Icons.circle_outlined,
-            size: 70,
+          leading: Container(
+            width: 60,
+            height: 300,
+            decoration: BoxDecoration(border: Border.all(color: Colors.black)
+                // borderRadius: BorderRadius.circular(100),
+                ),
+            child: Image.asset(
+              imageURL.toString(),
+              width: 200,
+            ),
           ),
           subtitle: Container(
             margin: EdgeInsets.only(top: 15),

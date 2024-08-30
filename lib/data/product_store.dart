@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class ProductStore extends ChangeNotifier {
   final List _storeList = [
-    ["shero", 300, "food"],
-    ["tella", 40, "drink"],
-    ["wine", 200, "drink"],
-    ["burger", 500, "snack"],
-    ["teje", 50, "drink"],
-    ["Chips", 10, "snack"],
-    ["dullet", 240, "food"],
-    ["wine", 200, "drink"],
-    ["water", 500, "drink"],
-    ["teje", 50, "drink"]
+    ["shero", 300, "food", "assets/images/focaccia.jpg"],
+    ["tella", 40, "drink", "assets/images/funghi.jpg"],
+    ["wine", 200, "drink", "assets/images/margherita.jpg"],
+    ["burger", 500, "snack", "assets/images/prosciutto.jpg"],
+    ["teje", 50, "drink", "assets/images/salamino.jpg"],
+    ["Chips", 10, "snack", "assets/images/prosciutto.jpg"],
+    ["dullet", 240, "food", "assets/images/prosciutto.jpg"],
+    ["wine", 200, "drink", "assets/images/prosciutto.jpg"],
+    ["water", 500, "drink", "assets/images/prosciutto.jpg"],
+    ["teje", 50, "drink", "assets/images/prosciutto.jpg"],
   ];
 
   final List _storeDrinkList = [];
@@ -54,6 +54,11 @@ class ProductStore extends ChangeNotifier {
 
   void deleteFromCart(ProductItem product) {
     _cartList.remove(product);
+    notifyListeners();
+  }
+
+  void deleteFromCartByIndex(int index) {
+    _cartList.removeAt(index);
     notifyListeners();
   }
 
