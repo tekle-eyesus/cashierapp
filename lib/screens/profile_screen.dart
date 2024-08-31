@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
           title: Text(
             "Profile",
             style: TextStyle(
-              color: Colors.black,
+              color: Color.fromARGB(255, 11, 0, 218),
               fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
@@ -38,14 +38,20 @@ class ProfileScreen extends StatelessWidget {
                 Column(
                   children: [
                     Text(
-                      "Name of the user",
+                      "Username",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Text("email or Username")
+                    Text(
+                      "email or Username",
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontStyle: FontStyle.italic,
+                      ),
+                    )
                   ],
                 )
               ],
@@ -59,7 +65,7 @@ class ProfileScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
                       Color.fromARGB(187, 42, 72, 219),
-                      const Color.fromARGB(255, 209, 126, 126),
+                      Color.fromARGB(255, 238, 69, 69),
                       // const Color.fromARGB(255, 252, 247, 247)
                     ], begin: Alignment.topLeft, end: Alignment.bottomLeft),
                     borderRadius: BorderRadius.circular(10),
@@ -91,8 +97,8 @@ class ProfileScreen extends StatelessWidget {
                   height: 60,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      Color.fromARGB(187, 42, 72, 219),
-                      const Color.fromARGB(255, 209, 126, 126),
+                      Color.fromARGB(186, 8, 47, 240),
+                      Color.fromARGB(255, 245, 51, 51),
                       // const Color.fromARGB(255, 252, 247, 247)
                     ], begin: Alignment.topLeft, end: Alignment.bottomLeft),
                     borderRadius: BorderRadius.circular(10),
@@ -125,7 +131,8 @@ class ProfileScreen extends StatelessWidget {
               height: 50,
             ),
             ExpansionTile(
-              leading: Icon(Icons.handshake),
+              leading:
+                  Icon(Icons.handshake, color: Color.fromARGB(255, 11, 0, 218)),
               backgroundColor: Colors.black12,
               title: Text("User Agreement"),
               children: [
@@ -136,7 +143,10 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             ExpansionTile(
-              leading: Icon(Icons.system_update_alt),
+              leading: Icon(
+                Icons.system_update_alt,
+                color: Color.fromARGB(255, 11, 0, 218),
+              ),
               backgroundColor: Colors.black12,
               title: Text("Version Update"),
               children: [
@@ -147,7 +157,10 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             ExpansionTile(
-              leading: Icon(Icons.code),
+              leading: Icon(
+                Icons.code,
+                color: Color.fromARGB(255, 11, 0, 218),
+              ),
               backgroundColor: Colors.black12,
               title: Text("Other Services"),
               children: [
