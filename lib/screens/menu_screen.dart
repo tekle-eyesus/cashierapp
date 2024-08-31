@@ -406,9 +406,17 @@ class CustomSearchDelegate extends SearchDelegate {
     List productQuery = [];
     for (var i = 0; i < mainList.length; i++) {
       if (mainList[i][0]
-          .toString()
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase()) ||
+          mainList[i][1]
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase()) ||
+          mainList[i][2]
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase())) {
         productQuery.add(mainList[i]);
       }
     }
@@ -433,9 +441,17 @@ class CustomSearchDelegate extends SearchDelegate {
     List productQuery = [];
     for (var i = 0; i < mainList.length; i++) {
       if (mainList[i][0]
-          .toString()
-          .toLowerCase()
-          .contains(query.toLowerCase())) {
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase()) ||
+          mainList[i][1]
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase()) ||
+          mainList[i][2]
+              .toString()
+              .toLowerCase()
+              .contains(query.toLowerCase())) {
         productQuery.add(mainList[i]);
       }
     }
@@ -444,12 +460,52 @@ class CustomSearchDelegate extends SearchDelegate {
         itemCount: productQuery.length,
         itemBuilder: (context, index) {
           var result = productQuery[index];
-          return ListTile(
-            title: Text(result[0].toString()),
-            subtitle: Text("\$" + result[1].toString()),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.add),
+          return Container(
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                    topLeft: Radius.circular(6),
+                    bottomRight: Radius.circular(6)),
+                color: const Color.fromARGB(26, 247, 235, 235),
+                border: Border.all(color: Color.fromARGB(255, 11, 0, 218))),
+            child: ListTile(
+              leading: Image.asset(
+                result[3],
+                scale: 10,
+              ),
+              title: Text(
+                result[0].toString(),
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              subtitle: Text(
+                "\$${result[1]}",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              trailing: Container(
+                width: 36,
+                height: 36,
+                decoration: BoxDecoration(
+                  color: Color.fromARGB(255, 11, 0, 218),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: IconButton(
+                  padding: EdgeInsets.symmetric(horizontal: 0),
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.add,
+                    weight: 10,
+                  ),
+                  color: Colors.white,
+                ),
+              ),
             ),
           );
         });
