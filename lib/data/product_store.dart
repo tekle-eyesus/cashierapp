@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 
 class ProductStore extends ChangeNotifier {
   final List _storeList = [
-    ["shero", 300, "food", "assets/images/focaccia.jpg"],
-    ["tella", 40, "drink", "assets/images/funghi.jpg"],
+    ["Shero", 300, "food", "assets/images/focaccia.jpg"],
+    ["Tella", 40, "drink", "assets/images/funghi.jpg"],
     ["wine", 200, "drink", "assets/images/margherita.jpg"],
-    ["burger", 500, "snack", "assets/images/prosciutto.jpg"],
-    ["teje", 50, "drink", "assets/images/salamino.jpg"],
+    ["Burger", 500, "snack", "assets/images/prosciutto.jpg"],
+    ["Teji", 50, "drink", "assets/images/salamino.jpg"],
     ["Chips", 10, "snack", "assets/images/prosciutto.jpg"],
-    ["dullet", 240, "food", "assets/images/prosciutto.jpg"],
-    ["wine", 200, "drink", "assets/images/prosciutto.jpg"],
-    ["water", 500, "drink", "assets/images/prosciutto.jpg"],
-    ["teje", 50, "drink", "assets/images/prosciutto.jpg"],
+    ["Dullet", 240, "food", "assets/images/prosciutto.jpg"],
+    ["Pizza", 200, "drink", "assets/images/prosciutto.jpg"],
+    ["Water", 500, "drink", "assets/images/prosciutto.jpg"],
+    ["Spinaci", 50, "Snack", "assets/images/prosciutto.jpg"],
   ];
 
   final List _storeDrinkList = [];

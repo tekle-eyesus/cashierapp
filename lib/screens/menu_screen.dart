@@ -127,6 +127,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
+                readOnly: true,
                 onTap: () => showSearch(
                     context: context,
                     delegate: CustomSearchDelegate(
