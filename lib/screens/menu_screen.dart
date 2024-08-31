@@ -1,5 +1,6 @@
 import 'package:cashier_app/customWidget/product_title.dart';
 import 'package:cashier_app/data/product_store.dart';
+import 'package:cashier_app/model/productItem.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -379,6 +380,7 @@ class _MenuScreenState extends State<MenuScreen> {
 
 class CustomSearchDelegate extends SearchDelegate {
   List mainList;
+
   CustomSearchDelegate({required this.mainList});
 
   @override
@@ -421,6 +423,22 @@ class CustomSearchDelegate extends SearchDelegate {
       }
     }
 
+    void newObject(
+        {required String image,
+        required String productName,
+        required String category,
+        required int price}) {
+      int count = 1;
+      ProductItem pItem = ProductItem(
+          imageURL: image,
+          productName: productName,
+          category: category,
+          price: price,
+          proAmount: count);
+
+      Provider.of<ProductStore>(context, listen: false).addProductToCart(pItem);
+    }
+
     return ListView.builder(
         itemCount: productQuery.length,
         itemBuilder: (context, index) {
@@ -429,7 +447,11 @@ class CustomSearchDelegate extends SearchDelegate {
             title: Text(result[0].toString()),
             subtitle: Text(result[1]),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () => newObject(
+                  category: result[2].toString(),
+                  image: result[3].toString(),
+                  productName: result[0].toString(),
+                  price: 200),
               icon: Icon(Icons.add),
             ),
           );
@@ -454,6 +476,22 @@ class CustomSearchDelegate extends SearchDelegate {
               .contains(query.toLowerCase())) {
         productQuery.add(mainList[i]);
       }
+    }
+
+    void newObject(
+        {required String image,
+        required String productName,
+        required String category,
+        required int price}) {
+      int count = 1;
+      ProductItem pItem = ProductItem(
+          imageURL: image,
+          productName: productName,
+          category: category,
+          price: price,
+          proAmount: count);
+
+      Provider.of<ProductStore>(context, listen: false).addProductToCart(pItem);
     }
 
     return ListView.builder(
@@ -498,7 +536,11 @@ class CustomSearchDelegate extends SearchDelegate {
                 ),
                 child: IconButton(
                   padding: EdgeInsets.symmetric(horizontal: 0),
-                  onPressed: () {},
+                  onPressed: () => newObject(
+                      category: result[2].toString(),
+                      image: result[3].toString(),
+                      productName: result[0].toString(),
+                      price: 200),
                   icon: Icon(
                     Icons.add,
                     weight: 10,
