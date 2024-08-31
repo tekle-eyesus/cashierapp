@@ -126,6 +126,12 @@ class _MenuScreenState extends State<MenuScreen> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
+                onTap: () => showSearch(
+                    context: context,
+                    delegate: CustomSearchDelegate(
+                        mainList:
+                            Provider.of<ProductStore>(context, listen: false)
+                                .getStoreList())),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 20,
@@ -368,5 +374,84 @@ class _MenuScreenState extends State<MenuScreen> {
         ),
       ),
     ));
+  }
+}
+
+class CustomSearchDelegate extends SearchDelegate {
+  List mainList;
+  CustomSearchDelegate({required this.mainList});
+
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+          onPressed: () {
+            query = "";
+          },
+          icon: const Icon(Icons.clear))
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          close(context, null);
+        },
+        icon: Icon(Icons.arrow_back));
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    List productQuery = [];
+    for (var i = 0; i < mainList.length; i++) {
+      if (mainList[i][0]
+          .toString()
+          .toLowerCase()
+          .contains(query.toLowerCase())) {
+        productQuery.add(mainList[i]);
+      }
+    }
+
+    return ListView.builder(
+        itemCount: productQuery.length,
+        itemBuilder: (context, index) {
+          var result = productQuery[index];
+          return ListTile(
+            title: Text(result[0].toString()),
+            subtitle: Text(result[1]),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+            ),
+          );
+        });
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    List productQuery = [];
+    for (var i = 0; i < mainList.length; i++) {
+      if (mainList[i][0]
+          .toString()
+          .toLowerCase()
+          .contains(query.toLowerCase())) {
+        productQuery.add(mainList[i]);
+      }
+    }
+
+    return ListView.builder(
+        itemCount: productQuery.length,
+        itemBuilder: (context, index) {
+          var result = productQuery[index];
+          return ListTile(
+            title: Text(result[0].toString()),
+            subtitle: Text("\$" + result[1].toString()),
+            trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.add),
+            ),
+          );
+        });
   }
 }

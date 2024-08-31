@@ -99,4 +99,8 @@ class ProductStore extends ChangeNotifier {
     _storeList.add(x);
     notifyListeners();
   }
+
+  List getStoreList() {
+    return storeList;
+  }
 }
