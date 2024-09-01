@@ -1,4 +1,5 @@
 import 'package:cashier_app/screens/home_screen.dart';
+import 'package:cashier_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -109,6 +110,34 @@ class _LoginScreenState extends State<LoginScreen> {
                         color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 0,
+                ),
+                InkWell(
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) {
+                    return RegisterScreen();
+                  })),
+                  child: Container(
+                    alignment: Alignment.center,
+                    margin: EdgeInsets.only(top: 10, left: 15, right: 15),
+                    width: 350,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      border:
+                          Border.all(color: Color.fromARGB(255, 4, 34, 184)),
+                    ),
+                    child: Text(
+                      "CREATE NEW ACCOUNT",
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 4, 34, 184),
+                        fontSize: 14,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),

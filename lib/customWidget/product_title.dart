@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:cashier_app/data/product_store.dart';
 import 'package:cashier_app/model/productItem.dart';
 import 'package:flutter/material.dart';
