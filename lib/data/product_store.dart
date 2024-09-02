@@ -114,7 +114,14 @@ class ProductStore extends ChangeNotifier {
     _userList.add(newUser);
   }
 
-  User getUser(String username) {
-    return userList[0];
+  int isUserFound(String username, String password) {
+    int found = 0;
+    for (var element in userList) {
+      if (element.username == username && element.password == password) {
+        found = 1;
+        print("you are found ");
+      }
+    }
+    return found;
   }
 }

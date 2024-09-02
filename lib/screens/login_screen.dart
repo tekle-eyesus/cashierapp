@@ -1,6 +1,9 @@
+import 'package:cashier_app/data/product_store.dart';
+import 'package:cashier_app/data/products_data.dart';
 import 'package:cashier_app/screens/home_screen.dart';
 import 'package:cashier_app/screens/register_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -10,6 +13,56 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  var usernameController = TextEditingController();
+  var passwordController = TextEditingController();
+
+  void handleUserLogin() {
+    final String username = usernameController.text.toString();
+    final String password = passwordController.text.toString();
+
+    if (username.isNotEmpty && password.isNotEmpty) {
+      int isFound = Provider.of<ProductStore>(context, listen: false)
+          .isUserFound(username, password);
+      if (isFound == 1) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) {
+          return HomeScreen();
+        }));
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext) {
+              return AlertDialog.adaptive(
+                title: Text("Error"),
+                content: Text("Register first"),
+              );
+            });
+      }
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext) {
+            return AlertDialog.adaptive(
+              content: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                    size: 40,
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Text("Empty username/password"),
+                ],
+              ),
+            );
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,6 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
+                      controller: usernameController,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(4),
                           icon: Padding(
@@ -76,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: TextField(
+                      controller: passwordController,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.all(4),
                           icon: Padding(
@@ -91,10 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintStyle: TextStyle(fontSize: 20)),
                     )),
                 InkWell(
-                  onTap: () => Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) {
-                    return HomeScreen();
-                  })),
+                  onTap: handleUserLogin,
                   child: Container(
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(top: 25, left: 15, right: 15),
@@ -143,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
                 const SizedBox(
-                  height: 270,
+                  height: 200,
                 ),
                 Icon(Icons.code),
                 Text(
