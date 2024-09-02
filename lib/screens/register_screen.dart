@@ -1,10 +1,70 @@
+import 'package:cashier_app/data/product_store.dart';
+import 'package:cashier_app/data/user_data.dart';
+import 'package:cashier_app/model/user.dart';
+import 'package:cashier_app/screens/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var newEmailController = TextEditingController();
+    var newUsernameController = TextEditingController();
+    var newPasswordController = TextEditingController();
+
+    void handleBack() {
+      Navigator.pop(context);
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return LoginScreen();
+      }));
+    }
+
+    void addNewUser() {
+      String username = newUsernameController.text.toString();
+      String password = newPasswordController.text.toString();
+      String emailAdd = newEmailController.text.toString();
+      if (username.isNotEmpty && password.isNotEmpty && emailAdd.isNotEmpty) {
+        User newUser =
+            User(email: emailAdd, username: username, password: password);
+        Provider.of<ProductStore>(context, listen: false)
+            .insertNewUser(newUser);
+        print(newUser.username);
+
+        showDialog(
+            context: context,
+            builder: (BuildContext) {
+              return AlertDialog(
+                title: Text("Success!!"),
+                content: Text(
+                  "Registration Completed !",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 25,
+                  ),
+                ),
+                actions: [TextButton(onPressed: handleBack, child: Text("OK"))],
+              );
+            });
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext) {
+              return AlertDialog(
+                content: Text(
+                  "Fill All Fields !",
+                  style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15),
+                ),
+              );
+            });
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 4, 34, 184),
@@ -49,7 +109,13 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   margin: EdgeInsets.all(5),
                   width: 300,
-                  child: TextField(
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter some text';
+                      }
+                    },
+                    controller: newEmailController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       icon: Padding(
@@ -87,6 +153,7 @@ class RegisterScreen extends StatelessWidget {
                   margin: EdgeInsets.all(5),
                   width: 300,
                   child: TextField(
+                    controller: newUsernameController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       icon: Padding(
@@ -124,6 +191,7 @@ class RegisterScreen extends StatelessWidget {
                   margin: EdgeInsets.all(5),
                   width: 300,
                   child: TextField(
+                    controller: newPasswordController,
                     decoration: InputDecoration(
                       suffix: Padding(
                         padding: const EdgeInsets.symmetric(
@@ -150,7 +218,7 @@ class RegisterScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                OutlinedButton(onPressed: () {}, child: Text("Register")),
+                OutlinedButton(onPressed: addNewUser, child: Text("Register")),
                 SizedBox(
                   width: 10,
                 ),
