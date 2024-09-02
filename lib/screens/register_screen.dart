@@ -16,57 +16,149 @@ class RegisterScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            margin: EdgeInsets.all(5),
-            width: 300,
-            child: TextField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.email),
-                label: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.blue, Colors.white],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomLeft,
+          ),
+        ),
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 160, bottom: 5),
                   child: Text(
-                    "EnterEmail Adress",
+                    "Enter Email-Address :",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-                hintText: "example@gmail.com",
-              ),
+                Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 212, 223, 231),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  margin: EdgeInsets.all(5),
+                  width: 300,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.email),
+                      ),
+                      label: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                      ),
+                      hintText: "example@gmail.com",
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5),
-            width: 300,
-            child: TextField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.person),
-                label: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 230, bottom: 5, top: 10),
                   child: Text(
                     "Username",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-                hintText: "",
-              ),
+                Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 212, 223, 231),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  margin: EdgeInsets.all(5),
+                  width: 300,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.person_rounded),
+                      ),
+                      label: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                      ),
+                      hintText: "username",
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Container(
-            margin: EdgeInsets.all(5),
-            width: 300,
-            child: TextField(
-              decoration: InputDecoration(
-                icon: Icon(Icons.key),
-                label: Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
+            Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(right: 230, bottom: 5, top: 10),
                   child: Text(
                     "Password",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
-                hintText: "",
-              ),
+                Container(
+                  height: 50,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: const Color.fromARGB(255, 212, 223, 231),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  margin: EdgeInsets.all(5),
+                  width: 300,
+                  child: TextField(
+                    decoration: InputDecoration(
+                      suffix: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 5, vertical: 0),
+                        child: Icon(Icons.remove_red_eye),
+                      ),
+                      border: InputBorder.none,
+                      icon: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Icon(Icons.key),
+                      ),
+                      label: Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                      ),
+                      hintText: "",
+                    ),
+                  ),
+                ),
+              ],
             ),
-          )
-        ],
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                OutlinedButton(onPressed: () {}, child: Text("Register")),
+                SizedBox(
+                  width: 10,
+                ),
+                OutlinedButton(onPressed: () {}, child: Text("Back To login"))
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
