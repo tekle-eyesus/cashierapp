@@ -71,8 +71,8 @@ class _AddScreenState extends State<AddScreen> {
       home: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            Color.fromARGB(255, 224, 222, 230),
-            Color.fromARGB(255, 198, 182, 182)
+            Color.fromARGB(255, 255, 255, 255),
+            Color.fromARGB(255, 232, 226, 226)
           ], begin: Alignment.topLeft, end: Alignment.bottomRight),
         ),
         child: Column(
