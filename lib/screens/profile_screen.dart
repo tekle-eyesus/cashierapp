@@ -1,10 +1,19 @@
+import 'package:cashier_app/data/product_store.dart';
+import 'package:cashier_app/data/user_data.dart';
+import 'package:cashier_app/model/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    User loggedUser =
+        Provider.of<ProductStore>(context, listen: false).getUserData();
+    List<String> userAgreements = [];
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -24,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
             )
           ],
         ),
-        body: Column(
+        body: ListView(
           children: [
             Row(
               children: [
@@ -36,9 +45,10 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Username",
+                      (loggedUser.username),
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 25,
@@ -46,7 +56,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "email or Username",
+                      loggedUser.email,
                       style: TextStyle(
                         color: Colors.grey,
                         fontStyle: FontStyle.italic,
@@ -138,7 +148,11 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                      "test lldllldd dllddl dldl dd ldldld  dld dl  dd d dl d ddl d dldld d"),
+                      "Theis user agreement is legal agreement between you(either An individual or a single entity) and Vein Services Co."),
+                  subtitle: Text(
+                      "👉 By using theis app or any other Vein software product you accept the terms of this agreement.If you do not accept this terms ,do not use any vein software product or service \n"
+                      "👉 Vein grants you a limited non-exclusive licence to install, use,access, and run this app \n"
+                      "👉 vein may make updates , upgrades to the vein software available to you ,including bug fixes and service upgrades. "),
                 )
               ],
             ),
@@ -152,7 +166,9 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                      "test lldllldd dllddl dldl dd ldldld  dld dl  dd d dl d ddl d dldld d"),
+                      "A software update can include ,but is not limited to:"),
+                  subtitle: Text(
+                      "  👉 Device stablity improvements, bug fix \n  👉 New and /or enhanced features. \n  👉 Further improvements to performance \nTo get the best from your App,please keep your app up to date and regularly check for software updates."),
                 )
               ],
             ),

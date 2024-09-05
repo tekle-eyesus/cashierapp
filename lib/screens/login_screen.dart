@@ -34,7 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
             builder: (BuildContext) {
               return AlertDialog.adaptive(
                 title: Text("Error"),
-                content: Text("Register first"),
+                content: Text("Incorrect password/username"),
               );
             });
       }

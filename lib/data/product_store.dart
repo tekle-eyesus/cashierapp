@@ -124,4 +124,8 @@ class ProductStore extends ChangeNotifier {
     }
     return found;
   }
+
+  User getUserData() {
+    return userList[0];
+  }
 }
