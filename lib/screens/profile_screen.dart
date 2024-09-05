@@ -41,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Icon(
                     Icons.supervised_user_circle,
-                    size: 100,
+                    size: 80,
                   ),
                 ),
                 Column(
@@ -66,6 +66,9 @@ class ProfileScreen extends StatelessWidget {
                 )
               ],
             ),
+            SizedBox(
+              height: 35,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -74,8 +77,8 @@ class ProfileScreen extends StatelessWidget {
                   height: 60,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      Color.fromARGB(187, 42, 72, 219),
-                      Color.fromARGB(255, 238, 69, 69),
+                      Color.fromARGB(186, 11, 40, 188),
+                      Color.fromARGB(255, 12, 15, 184),
                       // const Color.fromARGB(255, 252, 247, 247)
                     ], begin: Alignment.topLeft, end: Alignment.bottomLeft),
                     borderRadius: BorderRadius.circular(10),
@@ -94,7 +97,7 @@ class ProfileScreen extends StatelessWidget {
                           "History",
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -107,8 +110,8 @@ class ProfileScreen extends StatelessWidget {
                   height: 60,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(colors: [
-                      Color.fromARGB(186, 8, 47, 240),
-                      Color.fromARGB(255, 245, 51, 51),
+                      Color.fromARGB(185, 8, 38, 189),
+                      Color.fromARGB(255, 50, 37, 159),
                       // const Color.fromARGB(255, 252, 247, 247)
                     ], begin: Alignment.topLeft, end: Alignment.bottomLeft),
                     borderRadius: BorderRadius.circular(10),
@@ -127,7 +130,7 @@ class ProfileScreen extends StatelessWidget {
                           "Favorite",
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
