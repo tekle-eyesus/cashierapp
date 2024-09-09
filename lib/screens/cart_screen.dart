@@ -114,7 +114,6 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print("the build from the cartscreen!!");
     return MaterialApp(
         home: Scaffold(
       persistentFooterButtons: [
@@ -256,7 +255,9 @@ class _CartScreenState extends State<CartScreen> {
           child: Text(
             "Order Detail",
             style: TextStyle(
-                color: Colors.black, fontSize: 22, fontWeight: FontWeight.w600),
+                color: Color.fromARGB(255, 5, 5, 174),
+                fontSize: 22,
+                fontWeight: FontWeight.w600),
           ),
         ),
         actions: [

@@ -33,15 +33,59 @@ class _AddScreenState extends State<AddScreen> {
           categoryValue == null) {
         showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-                  title: Text("Error!!"),
-                  content: Text("Fill all fields !"),
-                  actions: [
-                    TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text("OK"))
+            builder: (context) {
+              return AlertDialog.adaptive(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                title: Text(
+                  "Fill all fields",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "To add product, you have to enter all required data",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(156, 33, 1, 1),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
-                ));
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "OK",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          fontSize: 23,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            });
       } else {
         String pname = newProductNameController.text;
         int pprice = int.parse(newProductPriceController.text);
@@ -55,15 +99,59 @@ class _AddScreenState extends State<AddScreen> {
         clearController();
         showDialog(
             context: context,
-            builder: (context) => AlertDialog(
-                  title: Text("Success!"),
-                  content: Text("product Successfully Added"),
-                  actions: [
-                    TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text("OK"))
+            builder: (context) {
+              return AlertDialog.adaptive(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                title: Text(
+                  "Success",
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Product added to store successfully!!!",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(31, 5, 1, 1),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
-                ));
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "OK",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          fontSize: 23,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              );
+            });
       }
     }
 

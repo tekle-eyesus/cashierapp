@@ -34,6 +34,8 @@ class _LoginScreenState extends State<LoginScreen> {
             context: context,
             builder: (BuildContext) {
               return AlertDialog.adaptive(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
                 content: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -87,8 +89,10 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       showDialog(
           context: context,
-          builder: (BuildContext) {
+          builder: (contex) {
             return AlertDialog.adaptive(
+              shape: ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,

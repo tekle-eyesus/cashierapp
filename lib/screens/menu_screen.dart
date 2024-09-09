@@ -113,7 +113,8 @@ class _MenuScreenState extends State<MenuScreen> {
                           onTap: () => setState(() {
                                 isDark = !isDark;
                               }),
-                          child: Text(isDark ? "Light Mode" : "Dark"))
+                          child: Text(isDark ? "Light Mode" : "Dark")),
+                      PopupMenuItem(child: Text("Exit")),
                     ])
           ],
         ),
@@ -532,7 +533,7 @@ class CustomSearchDelegate extends SearchDelegate {
                 width: 36,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 11, 0, 218),
+                  color: Color.fromARGB(255, 199, 1, 1),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: IconButton(
