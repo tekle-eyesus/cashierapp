@@ -35,31 +35,112 @@ class RegisterScreen extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext) {
-              return AlertDialog(
-                title: Text("Success!!"),
-                content: Text(
-                  "Registration Completed !",
+              return AlertDialog.adaptive(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                title: Text(
+                  "Success !!",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.green,
+                    fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    fontSize: 25,
                   ),
                 ),
-                actions: [TextButton(onPressed: handleBack, child: Text("OK"))],
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Your registration completed successfully",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(31, 5, 1, 1),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: handleBack,
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "OK",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          fontSize: 23,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               );
             });
       } else {
         showDialog(
             context: context,
             builder: (BuildContext) {
-              return AlertDialog(
-                content: Text(
-                  "Fill All Fields !",
+              return AlertDialog.adaptive(
+                shape: ContinuousRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                title: Text(
+                  "Fill all fields",
                   style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15),
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "To register, you have to enter all required data",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(31, 5, 1, 1),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                actions: [
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        "OK",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 11, 35, 249),
+                          fontSize: 23,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               );
             });
       }
