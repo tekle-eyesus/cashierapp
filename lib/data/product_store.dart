@@ -14,6 +14,8 @@ class ProductStore extends ChangeNotifier {
     ["Pizza", 200, "drink", "assets/images/prosciutto.jpg"],
     ["Water", 500, "drink", "assets/images/prosciutto.jpg"],
     ["Spinaci", 50, "Snack", "assets/images/prosciutto.jpg"],
+    ["margherita", 50, "Snack", "assets/images/prosciutto.jpg"],
+    ["salamino", 50, "Snack", "assets/images/focaccia.jpg"],
   ];
 
   final List _storeDrinkList = [];
